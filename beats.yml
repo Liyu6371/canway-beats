@@ -1,0 +1,5 @@
+# 日志相关
+# 日志默认输出地址在 /var/log/gse 也可自定义日志输出位置
+logger:
+  level: DEBUG
+  path: ./xxx.log

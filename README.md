@@ -1,2 +1,2 @@
 # canway-beats
-canway cloud monitor &amp; source monitor framework
+Canway 嘉为监控云&监控源框架
