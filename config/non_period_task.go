@@ -1,11 +1,7 @@
 package config
 
 // NonPeriodTask
-type NonPeriodTask map[string]interface{}
-
-func (n NonPeriodTask) ToMap() map[string]interface{} {
-	return map[string]interface{}(n)
-}
+type NonPeriodTask map[string]Task
 
 func (n NonPeriodTask) TaskNames() []string {
 	names := []string{}
@@ -15,7 +11,7 @@ func (n NonPeriodTask) TaskNames() []string {
 	return names
 }
 
-func (n NonPeriodTask) GetConfByName(name string) interface{} {
+func (n NonPeriodTask) GetTaskConfByName(name string) Task {
 	if v, ok := n[name]; ok {
 		return v
 	}
