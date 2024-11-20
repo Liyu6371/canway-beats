@@ -1,0 +1,74 @@
+# 基础配置
+logger:
+  level: DEBUG # DEBUG INFO WARN ERROR
+  path: ./canway-beats.log
+# 测试模式
+test_model: false
+
+# sender 基础配置
+sender:
+  socket:
+    enabled: true
+    worker: 3
+    buffer: 500
+    end_point: /var/run/ipc.state.report
+  kafka:
+    enabled: false
+    worker: 3
+    buffer: 500
+    required_acks: all # all:WaitForAll, local: WaitForLocal, no: NoResponse
+    brokers:
+      - localhost:9092
+
+# source 基础配置
+source:
+  kafka:
+    enabled: true
+    host: 127.0.0.1
+    port: 9092
+    username:
+    password:
+    version: 3.4.0
+    kafka_consumer_group: kafka_source_beat_consumer_group
+    kafka_oldest: false
+    kafka_assignor: range # range、roundrobin、sticky
+    kafka_topics:
+      - "topic1"
+      - "topic2"
+
+# 以下是周期任务的配置
+period_tasks:
+  vmware_discovery:
+    period: 10m
+    cloud_id: 1
+    server: xxx.xx.xx
+    username: xxxxxxxxxx
+    password: xxxxxxxxxx
+    source:
+    pipeline:
+      processor:
+        - "processor1"
+        - "processor2"
+        - "processor3"
+      shaper: "shaper1"
+    sender:
+      - "kafka"
+      - "file"
+  vmware_collect:
+    period: 1m
+    cloud_id: 1
+    server: xxx.xxx.xxx
+    username: username
+    password: password
+    source:
+      - "file"
+    pipeline:
+      processor:
+        - "processor4"
+      shaper: "shaper2"
+    sender:
+      - "kafka"
+      - "socket"
+
+# 以下是非周期任务的配置（监控源）
+non_period_tasks:
