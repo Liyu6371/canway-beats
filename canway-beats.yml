@@ -41,9 +41,9 @@ period_tasks:
   vmware_discovery:
     period: 10m
     cloud_id: 1
-    server: xxx.xx.xx
-    username: xxxxxxxxxx
-    password: xxxxxxxxxx
+    server: 192.168.104.4
+    account: monitoradmin@vsphere.local
+    password: 4ce55470704e541378c652f66871b687
     source:
     pipeline:
       processor:
@@ -57,9 +57,10 @@ period_tasks:
   vmware_collect:
     period: 1m
     cloud_id: 1
-    server: xxx.xxx.xxx
-    username: username
-    password: password
+    data_id: 1500016
+    server: 192.168.104.4
+    account: monitoradmin@vsphere.local
+    password: 4ce55470704e541378c652f66871b687
     source:
       - "file"
     pipeline:
@@ -72,3 +73,17 @@ period_tasks:
 
 # 以下是非周期任务的配置（监控源）
 non_period_tasks:
+  kafka_source_beat:
+    task_id: 6666
+    cmdb:
+      bk_app_code: cc-portal_saas
+      bk_app_secret: 9f1c00f9-5131-41f1-b823-d325d6dfcfef
+      bk_username: admin
+      domain: paas.dev.com
+    source:
+      - "kafka"
+    pipeline:
+      - "processor1"
+      - "shaper1"
+    sender:
+      - "socket"
