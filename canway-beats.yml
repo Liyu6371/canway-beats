@@ -70,6 +70,7 @@ period_tasks:
     sender:
       - "kafka"
       - "socket"
+      
 
 # 以下是非周期任务的配置（监控源）
 non_period_tasks:
